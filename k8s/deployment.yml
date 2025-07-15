@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gowebapp-deployment
+  namespace: gowebapp
+  labels:
+    app: goweb-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: goweb
+  template:
+    metadata:
+      labels:
+        app: goweb
+    spec:
+      containers:
+        - name: goweb-container
+          image: marijahmed/gowebapp:latest
+        
