@@ -6,7 +6,7 @@ metadata:
   labels:
     app: goweb-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: goweb
