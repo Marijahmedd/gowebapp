@@ -17,4 +17,4 @@ spec:
     spec:
       containers:
         - name: goweb-container
-          image: marijahmed/gowebapp:latest
+          image: marijahmed/gowebapp:{{ .Values.image.tag }}
