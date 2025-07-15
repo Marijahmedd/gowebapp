@@ -6,6 +6,7 @@ on:
       - ".github/workflows/**"
       - "helm/gowebapp/values.yaml"
       - "**.md"
+  workflow_dispatch:
 
 jobs:
   static-tests:
