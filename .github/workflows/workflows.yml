@@ -8,7 +8,7 @@ on:
       - "**.md"
 
 jobs:
-  test:
+  static-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -39,3 +39,21 @@ jobs:
       - name: Push Docker image
         run: |
           docker push marijahmed/gowebapp:${{ github.run_id }}
+
+  update-helm:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Update Helm values.yaml
+        run: |
+          sed -i "s/tag: \".*\"/tag: \"${{ github.run_id }}\"/" helm/gowebapp/values.yaml
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "muhammadmarijahmed@gmail.com"
+          git config --local user.name "marijahmedd"
+          git commit -m "Update Helm chart to use image tag ${{ github.run_id }}"
+          git push
